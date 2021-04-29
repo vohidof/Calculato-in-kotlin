@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Calculator1</string>
+    <string name="yetti">7</string>
+    <string name="x">X</string>
+    <string name="_6">6</string>
+    <string name="minus">-</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="plus">+</string>
+    <string name="c">C</string>
+    <string name="qovus">()</string>
+    <string name="foiz">%</string>
+</resources>
