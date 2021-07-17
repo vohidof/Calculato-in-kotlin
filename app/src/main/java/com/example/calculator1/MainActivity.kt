@@ -1,5 +1,6 @@
 package com.example.calculator1
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.buttons.*
@@ -10,13 +11,10 @@ import net.objecthunter.exp4j.ExpressionBuilder
 
 class MainActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-
+        
         btn0.setOnClickListener {
             try {
                 val firstChar = tvInput.text.subSequence(1, 1)
@@ -59,15 +57,92 @@ class MainActivity : AppCompatActivity() {
         }
         btnBracketLeft.setOnClickListener { appendOnClick(true, "(") }
         btnBracketRight.setOnClickListener { appendOnClick(true, ")") }
+
         btnDelete.setOnClickListener {
             val txtQuiz = tvInput.text.subSequence(0, tvInput.text.length - 1)
             tvInput.text = txtQuiz
         }
 
-        btnPlus.setOnClickListener { appendOnClick(false, "+") }
-        btnMinus.setOnClickListener { appendOnClick(false, "-") }
-        btnMultiply.setOnClickListener { appendOnClick(false, "*") }
-        btnDivision.setOnClickListener { appendOnClick(false, "÷") }
+        btnPlus.setOnClickListener {
+            val misol = tvInput.text.toString()
+            var amalIndex = -1
+            for (i in misol.indices) {
+                if (misol[i] == '+' || misol[i] == '-' || misol[i] == '*' || misol[i] == '/') {
+                    amalIndex = i
+                }
+            }
+            if (amalIndex == -1) {
+                if (!tvInput.text.toString().contains('+')) {
+                    tvInput.text = "${tvInput.text}+"
+                }
+            } else {
+                val ekranLength = tvInput.text.length
+                val matn = tvInput.text.toString().subSequence(amalIndex, ekranLength)
+                if (!matn.contains('+')) {
+                    tvInput.text = "${tvInput.text}+"
+                }
+            }
+        }
+        btnMinus.setOnClickListener {
+            val misol = tvInput.text.toString()
+            var amalIndex = -1
+            for (i in misol.indices) {
+                if (misol[i] == '+' || misol[i] == '-' || misol[i] == '*' || misol[i] == '/') {
+                    amalIndex = i
+                }
+            }
+            if (amalIndex == -1) {
+                if (!tvInput.text.toString().contains('-')) {
+                    tvInput.text = "${tvInput.text}-"
+                }
+            } else {
+                val ekranLength = tvInput.text.length
+                val matn = tvInput.text.toString().subSequence(amalIndex, ekranLength)
+                if (!matn.contains('-')) {
+                    tvInput.text = "${tvInput.text}-"
+                }
+            }
+        }
+        btnMultiply.setOnClickListener {
+            val misol = tvInput.text.toString()
+            var amalIndex = -1
+            for (i in misol.indices) {
+                if (misol[i] == '+' || misol[i] == '-' || misol[i] == '*' || misol[i] == '/') {
+                    amalIndex = i
+                }
+            }
+            if (amalIndex == -1) {
+                if (!tvInput.text.toString().contains('*')) {
+                    tvInput.text = "${tvInput.text}*"
+                }
+            } else {
+                val ekranLength = tvInput.text.length
+                val matn = tvInput.text.toString().subSequence(amalIndex, ekranLength)
+                if (!matn.contains('*')) {
+                    tvInput.text = "${tvInput.text}*"
+                }
+            }
+        }
+        btnDivision.setOnClickListener {
+            val misol = tvInput.text.toString()
+            var amalIndex = -1
+            for (i in misol.indices) {
+                if (misol[i] == '+' || misol[i] == '-' || misol[i] == '*' || misol[i] == '/') {
+                    amalIndex = i
+                }
+            }
+            if (amalIndex == -1) {
+                if (!tvInput.text.toString().contains('÷')) {
+                    tvInput.text = "${tvInput.text}÷"
+                }
+            } else {
+                val ekranLength = tvInput.text.length
+                val matn = tvInput.text.toString().subSequence(amalIndex, ekranLength)
+                if (!matn.contains('÷')) {
+                    tvInput.text = "${tvInput.text}÷"
+                }
+            }
+        }
 
         btnClear.setOnClickListener {
             clear()
@@ -94,7 +169,6 @@ class MainActivity : AppCompatActivity() {
     private fun clear() {
         tvInput.text = ""
         tvOutput.text = ""
-
     }
 
     private fun calculate() {
